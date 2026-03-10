@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机械加工动图集锦 - 制造工程基础A</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            color: #1e3c72;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: #1e3c72;
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        .category {
+            margin-bottom: 30px;
+        }
+
+        .category h3 {
+            color: #2a5298;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .category h3::before {
+            content: "▶";
+            margin-right: 10px;
+            color: #e74c3c;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .video-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 比例 */
+            background: #000;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-card .info {
+            padding: 20px;
+        }
+
+        .video-card .info h4 {
+            color: #1e3c72;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        .video-card .info .english {
+            color: #2a5298;
+            font-style: italic;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .video-card .info p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.9em;
+        }
+
+        .video-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #2a5298;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .video-link:hover {
+            background: #1e3c72;
+        }
+
+        .placeholder {
+            background: #e9ecef;
+            border: 2px dashed #adb5bd;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .placeholder-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 30px;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.6);
+        }
+
+        .resources {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .resources h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .resources ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .resources li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ffc107;
+        }
+
+        .resources li:last-child {
+            border-bottom: none;
+        }
+
+        .resources a {
+            color: #2a5298;
+            text-decoration: none;
+        }
+
+        .resources a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔧 机械加工动图集锦</h1>
+            <p>制造工程基础A | 基础切削加工与特殊成形原理</p>
+            <p style="margin-top: 10px; font-size: 0.9em; color: #888;">清华大学 2026春</p>
+        </header>
+
+        <!-- 视频资源推荐 -->
+        <div class="resources">
+            <h4>📺 推荐视频资源（点击标题观看）</h4>
+            <ul>
+                <li><a href="https://www.bilibili.com/video/BV1Dkx7etERd/" target="_blank">齿轮加工方法（成型法/展成法）</a> - 展成法原理详解</li>
+                <li><a href="https://www.bilibili.com/video/BV1hm4y1m7yd/" target="_blank">12个机械原理动画，直观易懂</a> - 机械原理合集</li>
+                <li><a href="https://www.bilibili.com/video/BV14x411u7NG/" target="_blank">机械加工基础：车削、铣削、钻削</a> - 基础加工方法</li>
+                <li><a href="https://www.bilibili.com/video/BV1eE411s7qR/" target="_blank">CNC加工过程全展示</a> - 数控加工演示</li>
+            </ul>
+        </div>
+
+        <!-- 一、基础切削加工方式 -->
+        <div class="section">
+            <h2>一、基础切削加工方式</h2>
+
+            <div class="category">
+                <h3>车削 (Turning)</h3>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-container">
+                            <iframe src="//player.bilibili.com/player.html?bvid=BV14x411u7NG&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen"></iframe>
+                        </div>
+                        <div class="info">
+                            <span class="english">Turning</span>
+                            <h4>车削加工基础</h4>
+                            <p>利用工件的旋转运动和刀具的直线运动来改变毛坯的形状和尺寸，主要用于加工回转体表面。</p>
+                            <a href="https://www.bilibili.com/video/BV14x411u7NG/" target="_blank" class="video-link">🎬 去B站观看高清</a>
+                        </div>
+                    </div>
+                    <div class="placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <p><strong>车外圆面</strong><br>请添加视频BV号或链接</p>
+                    </div>
+                    <div class="placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <p><strong>车螺纹</strong><br>请添加视频BV号或链接</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h3>铣削 (Milling)</h3>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-container">
+                            <iframe src="//player.bilibili.com/player.html?bvid=BV14x411u7NG&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen"></iframe>
+                        </div>
+                        <div class="info">
+                            <span class="english">Milling</span>
+                            <h4>铣削加工</h4>
+                            <p>利用旋转的多刃刀具加工平面、成形面或沟槽，铣刀在每一转中每个刀刃只参与一次切削。</p>
+                            <a href="https://www.bilibili.com/video/BV14x411u7NG/" target="_blank" class="video-link">🎬 去B站观看高清</a>
+                        </div>
+                    </div>
+                    <div class="placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <p><strong>铣平面</strong><br>请添加视频BV号或链接</p>
+                    </div>
+                    <div class="placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <p><strong>铣成形面</strong><br>请添加视频BV号或链接</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h3>钻削 (Drilling)</h3>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-container">
+                            <iframe src="//player.bilibili.com/player.html?bvid=BV14x411u7NG&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen"></iframe>
+                        </div>
+                        <div class="info">
+                            <span class="english">Drilling</span>
+                            <h4>钻削加工</h4>
+                            <p>在实心材料上加工孔的过程，是孔加工的入门级技术。</p>
+                            <a href="https://www.bilibili.com/video/BV14x411u7NG/" target="_blank" class="video-link">🎬 去B站观看高清</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h3>磨削 (Grinding)</h3>
+                <div class="video-grid">
+                    <div class="placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <p><strong>磨削加工</strong><br>利用砂轮作为刀具进行精加工<br><small>请添加视频BV号或链接</small></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h3>刨削 (Planing)</h3>
+                <div class="video-grid">
+                    <div class="placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <p><strong>刨削加工</strong><br>刀具与工件作直线往复运动来加工平面<br><small>请添加视频BV号或链接</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 二、特定功能加工方式 -->
+        <div class="section">
+            <h2>二、特定功能加工方式</h2>
+
+            <div class="video-grid">
+                <div class="placeholder">
+                    <div class="placeholder-icon">📷</div>
+                    <p><strong>镗孔 (Boring)</strong><br>在车床上对已有孔进行扩大或精加工</p>
+                </div>
+                <div class="placeholder">
+                    <div class="placeholder-icon">📷</div>
+                    <p><strong>扩孔 (Enlarging)</strong><br>对已钻出的孔进行扩大加工</p>
+                </div>
+                <div class="placeholder">
+                    <div class="placeholder-icon">📷</div>
+                    <p><strong>铰孔 (Reaming)</strong><br>对孔进行高精度、低粗糙度的精加工</p>
+                </div>
+                <div class="placeholder">
+                    <div class="placeholder-icon">📷</div>
+                    <p><strong>中心钻 (Center Drilling)</strong><br>用于加工中心孔</p>
+                </div>
+                <div class="placeholder">
+                    <div class="placeholder-icon">📷</div>
+                    <p><strong>切断加工 (Cutting off)</strong><br>将工件切断的加工过程</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 三、特殊成形原理（发生线形成方法） -->
+        <div class="section">
+            <h2>三、特殊成形原理（发生线形成方法）</h2>
+
+            <div class="category">
+                <h3>展成法 (Generating Method)</h3>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-container">
+                            <iframe src="//player.bilibili.com/player.html?bvid=BV1Dkx7etERd&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen"></iframe>
+                        </div>
+                        <div class="info">
+                            <span class="english">Generating Method</span>
+                            <h4>齿轮加工方法（成型法/展成法）</h4>
+                            <p>利用刀具与工件间的包络运动形成表面，滚齿和插齿都属于展成法加工。</p>
+                            <a href="https://www.bilibili.com/video/BV1Dkx7etERd/" target="_blank" class="video-link">🎬 去B站观看高清</a>
+                        </div>
+                    </div>
+                    <div class="placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <p><strong>滚齿加工 (Gear Hobbing)</strong><br>展成法的典型应用</p>
+                    </div>
+                    <div class="placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <p><strong>插齿加工 (Gear Shaping)</strong><br>展成法另一种应用</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category">
+                <h3>其他成形方法</h3>
+                <div class="video-grid">
+                    <div class="placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <p><strong>轨迹法</strong><br>刀尖运动轨迹形成发生线</p>
+                    </div>
+                    <div class="placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <p><strong>成形法</strong><br>利用切削刃的几何形状形成发生线</p>
+                    </div>
+                    <div class="placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <p><strong>相切法</strong><br>旋转切削刃与工件表面相切</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 机械原理合集 -->
+        <div class="section">
+            <h2>四、机械原理动画合集</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="//player.bilibili.com/player.html?bvid=BV1hm4y1m7yd&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen"></iframe>
+                    </div>
+                    <div class="info">
+                        <span class="english">Mechanical Principles</span>
+                        <h4>12个机械原理动画</h4>
+                        <p>直观易懂的机械原理动画合集，包括各种连杆机构、齿轮传动等。</p>
+                        <a href="https://www.bilibili.com/video/BV1hm4y1m7yd/" target="_blank" class="video-link">🎬 去B站观看高清</a>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="//player.bilibili.com/player.html?bvid=BV1eE411s7qR&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen"></iframe>
+                    </div>
+                    <div class="info">
+                        <span class="english">CNC Machining</span>
+                        <h4>CNC加工过程全展示</h4>
+                        <p>数控机床加工过程的完整展示，包括各种加工方式。</p>
+                        <a href="https://www.bilibili.com/video/BV1eE411s7qR/" target="_blank" class="video-link">🎬 去B站观看高清</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>💡 <strong>使用说明：</strong></p>
+            <p style="margin-top: 10px;">1. 视频已嵌入在页面中，可以直接播放</p>
+            <p>2. 点击"去B站观看高清"可跳转到B站查看更多相关内容</p>
+            <p>3. 如需添加更多视频，找到视频BV号后，用文本编辑器打开HTML文件添加</p>
+            <p style="margin-top: 20px; font-size: 0.9em;">
+                数据来源：Bilibili | 清华大学 2026春 制造工程基础A
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常微分方程简介</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 4px solid #3498db;
+            background: linear-gradient(90deg, #ecf0f1 0%, transparent 100%);
+            padding: 10px 15px;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-left: 12px;
+            border-left: 3px solid #27ae60;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+
+        .formula {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 6px;
+            font-family: "Consolas", "Courier New", monospace;
+            margin: 15px 0;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+
+        .note::before {
+            content: "💡 补充";
+            font-weight: bold;
+            color: #856404;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .step-list {
+            background: #e8f4f8;
+            padding: 20px 20px 20px 50px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .step-list ol {
+            list-style-type: none;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: -35px;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        video {
+            max-width: 100%;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .caption {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3498db, transparent);
+            margin: 30px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>常微分方程</h1>
+
+        <h2>名词解释</h2>
+        <div class="highlight">
+            <p><strong>通解 + 定解条件 = 特解</strong></p>
+            <p><strong>唯一解 = 特解</strong></p>
+            <p><strong>稳态解 = 定常解</strong></p>
+        </div>
+        <p class="caption">稳态解例子</p>
+        <img src="image.png" alt="稳态解例子">
+
+        <div class="section-divider"></div>
+
+        <h2>人口模型</h2>
+
+        <h3>1. 指数增长：Malthus模型</h3>
+        <img src="image-1.png" alt="Malthus模型">
+
+        <h3>2. 存在生存空间约束：Verhulst模型（=Logistic）</h3>
+        <img src="image-2.png" alt="Verhulst模型">
+
+        <div class="note">
+            <p><strong>裂项积分公式：</strong></p>
+            <div class="formula">
+                1/[(x-a)(x-b)] = 1/(b-a) × [1/(x-a) - 1/(x-b)]
+            </div>
+        </div>
+
+        <div class="note">
+            <p><strong>自治方程</strong>（待补充）</p>
+        </div>
+
+        <h3>解题思路</h3>
+        <div class="step-list">
+            <ol>
+                <li>通过<strong>"观察法"</strong>先筛选出"定常解"
+                    <br><small>例：在人口增长模型中，使得增长率=0，对于Verhulst模型</small>
+                </li>
+                <li>变量分离两边积分</li>
+                <li>通解 → 特解</li>
+            </ol>
+        </div>
+        <p class="caption">观察法判别</p>
+        <img src="image-3.png" alt="观察法判别">
+
+        <div class="section-divider"></div>
+
+        <h2>变化率方程</h2>
+        <p>y' = f(y,t)</p>
+        <img src="image-5.png" alt="变化率方程">
+
+        <div class="section-divider"></div>
+
+        <h2>方向图（流线）</h2>
+        <img src="image-6.png" alt="方向图_流线">
+        <video controls>
+            <source src="Direction_Graph.mp4" type="video/mp4">
+            您的浏览器不支持视频播放。
+        </video>
+
+        <div class="section-divider"></div>
+
+        <h2>种群生态模型（Lotka-Volterra）</h2>
+        <img src="image-4.png" alt="种群生态模型">
+
+        <div class="section-divider"></div>
+
+        <h2>传染病模型</h2>
+        <p><strong>SI模型</strong>、<strong>SIR模型</strong></p>
+
+        <div class="note">
+            <p>一般除种群生态模型定常解好求解，其余的都需通过<strong>相图（Phase Diagram）</strong>表达求解</p>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <h2>N体问题</h2>
+        <p>（待补充）</p>
+
+        <div class="section-divider"></div>
+
+        <h2>常微分方程分类</h2>
+        <img src="image-7.png" alt="常微分方程分类">
+        <div class="tag-container">
+            <span class="tag">线性</span>
+            <span class="tag">齐次</span>
+            <span class="tag">常系数</span>
+            <span class="tag">非齐次</span>
+            <span class="tag">可降阶</span>
+            <span class="tag">伯努利</span>
+            <span class="tag">线性可变系数</span>
+            <span class="tag">非线性</span>
+            <span class="tag">偏微分方程</span>
+            <span class="tag">自治</span>
+        </div>
+        <p style="margin-top: 15px; color: #7f8c8d; font-size: 0.9em;">
+            <em>* 自治方程少见类型：运输方程、热方程</em>
+        </p>
+
+    </div>
+</body>
+</html>

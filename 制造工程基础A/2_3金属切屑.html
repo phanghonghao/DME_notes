@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.3 金属切屑</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 4px solid #764ba2;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            font-size: 18px;
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .formula {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            margin: 15px 0;
+            font-family: "Courier New", monospace;
+            font-size: 16px;
+            border-radius: 4px;
+            color: #2c3e50;
+        }
+
+        .remark {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 30px 0;
+        }
+
+        .section-intro {
+            background: #e7f3ff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #004085;
+        }
+
+        .highlight {
+            background: #d4edda;
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>2.3 金属切屑</h1>
+
+        <h2>1.2 加工表面三要素</h2>
+
+        <h3>主运动</h3>
+        <p>刀具切屑的运动</p>
+
+        <h3>进给运动</h3>
+        <p>相对移动方向来完成切屑运动</p>
+
+        <h2>切屑参数</h2>
+        <div class="section-intro">
+            切屑速度 v<sub>c</sub>、切屑深度 a<sub>p</sub>、进给量 f
+        </div>
+
+        <img src="切屑三要素.png" alt="切屑三要素">
+
+        <h3>切屑速度 v<sub>c</sub></h3>
+
+        <p><strong>定义：</strong> 切屑刀刃上速度最大的点（外径最大的地方）</p>
+
+        <img src="外径最大_速度最快的点.png" alt="外径最大_速度最快的点">
+
+        <div class="remark">
+            <strong>备注：</strong> d<sub>w</sub>、d<sub>m</sub> 单位都是 mm
+        </div>
+
+        <p><strong>公式：</strong></p>
+        <div class="formula">
+            v<sub>c</sub> = π × d × n / 1000 （单位：m/s 或 m/min）
+        </div>
+
+        <h3>切屑深度 a<sub>p</sub></h3>
+
+        <img src="切屑深度.png" alt="切屑深度">
+
+        <h3>进给量 f</h3>
+
+        <p><strong>定义：</strong> 进给量 f = 回转一圈，刀具所进给的相对位移（mm）</p>
+
+        <p><strong>公式：</strong></p>
+        <div class="formula">
+            v<sub>f</sub> = f × n （单位：m/s 或 m/min）
+        </div>
+
+        <h4>每齿进给量（z 齿）</h4>
+        <div class="formula">
+            v<sub>f</sub> = f<sub>z</sub> × z × n
+        </div>
+        <p>每齿 = 转 1/z 圈（进 1 个齿）</p>
+
+        <h4>效率（三要素乘积）</h4>
+        <p>三要素乘积 = 梯形面积 × 切屑速度 = 体积</p>
+
+        <img src="手绘定义.jpg" alt="手绘定义">
+
+        <hr>
+
+        <h2>1.3 刀具角度参数</h2>
+
+        <p><strong>分类：</strong> <span class="highlight">直角切屑</span>、<span class="highlight">斜角切屑</span></p>
+
+        <img src="刀具切屑结构.png" alt="刀具切屑结构">
+
+        <h3>刀具结构组成</h3>
+
+        <ul>
+            <li><strong>前刀面 A<sub>γ</sub></strong>：刀具切屑流过的面</li>
+            <li><strong>后刀面 A<sub>α</sub></strong>：相对于加工面的斜面</li>
+            <li><strong>副后刀面 A<sub>α'</sub></strong>：后刀面隔壁</li>
+        </ul>
+
+        <p><strong>三面两刃一刀 = 刀尖</strong></p>
+    </div>
+</body>
+</html>

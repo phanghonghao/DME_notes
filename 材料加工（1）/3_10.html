@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>材料加工（1）- 凝固与铸造缺陷 | 3月10日课程笔记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --code-bg: #1e293b;
+            --code-text: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .course-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .course-info span {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        /* Table of Contents */
+        .toc {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .toc-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .toc-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toc-card h3::before {
+            content: "";
+            width: 4px;
+            height: 18px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .toc a:hover {
+            background: #f1f5f9;
+            color: var(--primary-color);
+        }
+
+        .toc .toc-level-2 {
+            padding-left: 16px;
+        }
+
+        .toc .toc-level-3 {
+            padding-left: 32px;
+        }
+
+        /* Content */
+        .content {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .content h1 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--border-color);
+        }
+
+        .content h2 {
+            font-size: 1.5rem;
+            margin: 35px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .content h3 {
+            font-size: 1.25rem;
+            margin: 25px 0 16px;
+            color: #374151;
+        }
+
+        .content h4 {
+            font-size: 1.15rem;
+            margin: 20px 0 12px;
+            color: var(--text-color);
+        }
+
+        .content p {
+            margin: 12px 0;
+            color: var(--text-light);
+        }
+
+        .content ul, .content ol {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+
+        .content li {
+            margin: 8px 0;
+            color: var(--text-light);
+        }
+
+        .content strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Images */
+        .content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .content img:hover {
+            transform: scale(1.02);
+        }
+
+        .image-caption {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: -12px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Tables */
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: var(--bg-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .content th {
+            background: var(--primary-color);
+            color: white;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .content td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-light);
+        }
+
+        .content tr:last-child td {
+            border-bottom: none;
+        }
+
+        .content tr:hover {
+            background: #f1f5f9;
+        }
+
+        /* Code blocks */
+        .content code {
+            background: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: "Fira Code", monospace;
+            font-size: 0.9em;
+        }
+
+        .content pre {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .content pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px 24px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .info-box p {
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+            transition: all 0.3s;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .toc {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .content {
+                padding: 24px;
+            }
+
+            .content h1 {
+                font-size: 1.6rem;
+            }
+
+            .content h2 {
+                font-size: 1.3rem;
+            }
+
+            .course-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .toc {
+                display: none;
+            }
+
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                box-shadow: none;
+            }
+
+            .back-to-top {
+                display: none;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>材料加工（1）- 凝固与铸造缺陷</h1>
+            <div class="course-info">
+                <span>学期：2026年春</span>
+                <span>日期：3月10日</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-layout">
+            <!-- Table of Contents -->
+            <nav class="toc">
+                <div class="toc-card">
+                    <h3>目录</h3>
+                    <ul>
+                        <li><a href="#section-1">理想：平衡凝固</a></li>
+                        <li><a href="#section-2">逐渐的凝固组织</a></li>
+                        <li><a href="#section-3">竖状晶，等轴晶</a></li>
+                        <li><a href="#section-4">细化处理</a></li>
+                        <li><a href="#section-5">形核剂——形核基地</a></li>
+                        <li><a href="#section-6">影响长大</a></li>
+                        <li><a href="#section-7">改变生长方式</a>
+                            <ul class="toc-level-2">
+                                <li><a href="#section-7-1">球化处理</a></li>
+                                <li><a href="#section-7-2">定向柱状晶</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#section-8">单晶（单晶叶片）</a></li>
+                        <li><a href="#section-9">2.4 主要缺陷&产生原因</a>
+                            <ul class="toc-level-2">
+                                <li><a href="#section-9-1">2.4.1 充型不足</a></li>
+                                <li><a href="#section-9-2">2.4.2 收缩类（缩孔，缩松）</a></li>
+                                <li><a href="#section-9-3">2.4.3 应力缺陷</a></li>
+                                <li><a href="#section-9-4">减小应力方式</a></li>
+                                <li><a href="#section-9-5">2.4.4 界面缺陷</a></li>
+                                <li><a href="#section-9-6">2.4.4 成分偏析&夹杂物缺陷</a></li>
+                                <li><a href="#section-9-7">铸造合金中的气体</a></li>
+                                <li><a href="#section-9-8">夹杂物</a></li>
+                                <li><a href="#section-9-9">金属类铸型作用类的缺陷——粘砂</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="content">
+                <h1>平衡凝固与紧平衡凝固的溶质分布</h1>
+
+                <h2 id="section-1">理想：平衡凝固</h2>
+                <p>界面：固液两相的交界处</p>
+                <p>近平衡：界面上的成分还按平衡来走</p>
+                <p>Scheil方程（条件：固态没有扩散）</p>
+                <p>随着温度降低，固相的溶质跑到液相（可能形成共晶）</p>
+
+                <h2 id="section-2">逐渐的凝固组织</h2>
+                <p><img src="不同温度下凝固晶体组织.png" alt="逐渐的凝固组织" loading="lazy"></p>
+<p class="image-caption">逐渐的凝固组织</p>
+                <p>最外边：极冷：过冷度很大——细晶</p>
+                <p>中间：散热方向方向呢延长，长条状</p>
+                <p>形核（大）：散热</p>
+
+                <h2 id="section-3">竖状晶，等轴晶</h2>
+                <ul>
+                    <li>通过改变温度梯度大小，可以得到不同的偏好</li>
+                </ul>
+
+                <h2 id="section-4">细化处理</h2>
+                <p>细化处理：非铁合金</p>
+                <p>孕育处理：铸铁</p>
+                <p>细化&孕育：钢</p>
+
+                <h2 id="section-5">形核剂——形核基地</h2>
+                <p>要求：让凝固的部分容易在其上生长，界面能低（界面张力小）结合能大</p>
+                <p>形核剂例子：</p>
+                <p>形核条件：结构，浓度，能量</p>
+                <p><strong>可以加入生核剂</strong></p>
+
+                <h2 id="section-6">影响长大</h2>
+                <p>影响长大：机械振动、外加磁场、化学添加剂</p>
+                <p>金属：粗糙界面</p>
+                <p>非金属（硅）：</p>
+
+                <h2 id="section-7">改变生长方式</h2>
+
+                <h3 id="section-7-1">球化处理</h3>
+                <p>球化处理（避免"片状"，球化结构强度更强）</p>
+                <p><img src="球化.png" alt="球化" loading="lazy"></p>
+<p class="image-caption">球化</p>
+
+                <h3 id="section-7-2">定向柱状晶</h3>
+                <p>形成条件：单向热流，足够高的温度梯度，杜绝外来结晶核心</p>
+                <p>注：晶体沿热流方向反向生长</p>
+                <p>例子：Bridgman定向凝固（炉外法）</p>
+                <p><strong>炉外温度低，炉内温度高</strong></p>
+                <p><img src="炉外法.png" alt="炉外法" loading="lazy"></p>
+<p class="image-caption">炉外法</p>
+
+                <h2 id="section-8">单晶（单晶叶片）</h2>
+                <p>选晶器：让只有一个条件</p>
+                <p>其他条件：如上</p>
+                <p>例子：</p>
+                <p><img src="选晶器.png" alt="选晶器" loading="lazy"></p>
+<p class="image-caption">选晶器</p>
+                <p><img src="单晶_完整装置.png" alt="单晶_完整装置" loading="lazy"></p>
+<p class="image-caption">单晶_完整装置</p>
+                <p><img src="比较.png" alt="比较" loading="lazy"></p>
+<p class="image-caption">比较</p>
+
+                <h1 id="section-9">2.4 主要缺陷&产生原因</h1>
+
+                <h2 id="section-9-1">2.4.1 充型不足</h2>
+                <p>冷隔：两个凝固液挨在一起，但是结合能力弱</p>
+
+                <h2 id="section-9-2">2.4.2 收缩类（缩孔，缩松）</h2>
+                <p>特例：石墨膨胀抵消部分收缩</p>
+                <p>因素：化学成分，浇注温度，铸型结构&条件（形成阻碍）</p>
+                <p><strong>模子要比铸件大，留出收缩空间（合适收缩率）</strong></p>
+                <p>减小收缩&增加补缩</p>
+                <p>（待补充）缩孔？缩松？？</p>
+                <p>补缩："顺序凝固原则" 从最远处——中间——冒口</p>
+                <p>"同时凝固"：特指没有办法达到顺序凝固</p>
+                <p>条件：</p>
+                <ul>
+                    <li>壁厚均匀的薄壁铸件</li>
+                    <li>采用"顺序凝固"——产生热裂，变形（温度不均，热应力大）</li>
+                </ul>
+                <p>调节方式：用冒口来慢，冷铁来加快</p>
+
+                <h2 id="section-9-3">2.4.3 应力缺陷（变形——形状改变，热裂，冷裂）</h2>
+                <p>热应力：收缩不均匀</p>
+                <p>相变应力：相变不同步</p>
+                <p>Ex. 奥氏体（小，密排）——铁素体（大）</p>
+                <p>收缩应力（过程中）</p>
+                <p>考虑铸型(Mold)在里边给予支撑，拿出来后缺乏了支持力，仍旧有形变</p>
+                <p>裂开与否：</p>
+
+                <h2 id="section-9-4">减小应力方式</h2>
+                <p>人工时效：热效应（淬火？？？，待确定）</p>
+                <p>铸型变形：挠曲应变</p>
+                <p>长的受压；短的受拉</p>
+                <p>快速冷却的，先建立刚度（硬的），带动慢速冷却的（软的）收缩，慢速冷却的之后在冷却收缩，所以更小了；小结：冷却快的长，冷却慢的短</p>
+                <p>另外，还有残余拉应力，导致部分缩短</p>
+                <p><img src="挠曲应变.png" alt="挠曲应变" loading="lazy"></p>
+<p class="image-caption">挠曲应变</p>
+                <p>解决方式：增加内应力etc.</p>
+
+                <h2 id="section-9-5">2.4.4 界面缺陷（气孔，夹杂物）</h2>
+                <p><strong>严重缺陷（不允许存在）</strong></p>
+                <p>外裂纹：</p>
+                <p>内裂纹：</p>
+
+                <h3 id="section-9-5-1">热裂————沿晶断裂</h3>
+                <p>热裂：凝固末期（铸件已经可以处理了，但仍旧存在液态的晶界，液态承受不了应力，所以最后就沿晶裂开）</p>
+                <p>对于合金：粗大树枝晶，易裂</p>
+                <p>铸型方面：应力大，易开裂</p>
+                <p>铸型结构不合理（截面直角相交）</p>
+                <p>防止措施：细晶，减少杂质&拘束</p>
+
+                <h3 id="section-9-5-2">冷裂————穿晶断裂</h3>
+                <p>冷裂：较低温下形成</p>
+                <p>原因：受拉伸的部分（应力大小和性能），应力超过性能</p>
+                <p>影响因素：应力增大，强度塑形降低</p>
+                <p>措施：减小应力（不超过性能）</p>
+
+                <h2 id="section-9-6">2.4.4 成分偏析&夹杂物缺陷</h2>
+                <p>枝晶偏析（同一个晶体，如：同一个枝晶里不同树枝的冷却快慢不同，成分也不同）</p>
+                <p>晶界偏析（两个枝晶的截面）</p>
+
+                <h3 id="section-9-6-1">影响偏析速度</h3>
+                <p>太慢，太快，偏析=小！</p>
+                <p>偏析程度(S_e)，偏析比（S_R）：用来表示偏析大小</p>
+
+                <h3 id="section-9-6-2">影响因子</h3>
+                <ul>
+                    <li>扩撒能力低的溶质元素（容易偏析）</li>
+                    <li>合金晕啊素的影响（含碳量大，偏析程度大）</li>
+                </ul>
+
+                <h2 id="section-9-7">铸造合金中的气体</h2>
+                <ul>
+                    <li>析出性气孔（溶解度：固体&lt;气体，原先溶解在液体金属的流失到空气中）</li>
+                    <li>反应性气孔（化学反应，生成CO,不溶于金属）</li>
+                    <li>侵入性气孔（充型过程中充进去的）</li>
+                </ul>
+
+                <h2 id="section-9-8">夹杂物</h2>
+                <p>夹杂物：不同于几题金属的质点</p>
+                <p>各种分类（熔点，大小，分布，形状）</p>
+                <p>来源！比较关键：</p>
+                <ul>
+                    <li>内生（脱氧O，脱硫S）（溶解的S,0，形成过饱和）</li>
+                    <li>外来（熔炼的耐火材料，浇注时的材料，"掉进去"）</li>
+                </ul>
+
+                <h2 id="section-9-9">金属类铸型作用类的缺陷——粘砂</h2>
+
+                <h3 id="section-9-9-1">粘砂</h3>
+                <ul>
+                    <li>机械（钻入空隙）</li>
+                    <li>化学（被氧化FeO-SiO2，焊接起来了，同时和金属和沙子连接起来）</li>
+                </ul>
+
+                <div style="margin-top: 50px; text-align: center; color: var(--text-light); font-size: 0.9em; padding: 20px; background: var(--bg-color); border-radius: 8px;">
+                    ——— 笔记结束 ———
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <p>材料加工（1）课程笔记 | 2026年春 | 清华大学</p>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" title="返回顶部">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+    <script>
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Image lightbox
+        document.querySelectorAll('.content img').forEach(img => {
+            img.addEventListener('click', function() {
+                const overlay = document.createElement('div');
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer;';
+                const enlarged = document.createElement('img');
+                enlarged.src = this.src;
+                enlarged.style.cssText = 'max-width:90%;max-height:90%;object-fit:contain;';
+                overlay.appendChild(enlarged);
+                overlay.addEventListener('click', () => overlay.remove());
+                document.body.appendChild(overlay);
+            });
+        });
+
+        // Highlight current section in TOC
+        const sections = document.querySelectorAll('h2[id], h3[id]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.toc a').forEach(a => {
+                a.style.background = '';
+                a.style.color = '';
+                if (a.getAttribute('href') === `#${current}`) {
+                    a.style.background = '#f1f5f9';
+                    a.style.color = 'var(--primary-color)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

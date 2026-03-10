@@ -1,0 +1,12 @@
+# 忽略非笔记文件
+*.pdf
+*.docx
+*.mp4
+*.jpg
+*.jpeg
+
+# 忽略 Claude 配置
+.claude/
+
+# 忽略作业文件夹
+作业/

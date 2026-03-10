@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💡解答 Q2-5</title>
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.8;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .toc {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .toc h2 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .toc ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            list-style: none;
+        }
+
+        .toc a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .toc a:hover {
+            background: rgba(255,255,255,0.35);
+        }
+
+        .content {
+            padding: 2rem 2.5rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h2 {
+            font-size: 1.35rem;
+            color: #4a5568;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-left: 0.75rem;
+            border-left: 4px solid #667eea;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .math-block {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f7fafc;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .inline-image {
+            display: inline-block;
+            vertical-align: middle;
+            max-height: 1.5em;
+            margin: 0 0.25rem;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .toc {
+                position: static;
+                background: #f0f0f0;
+                color: #333;
+            }
+            .toc a {
+                color: #333;
+                background: #ddd;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 1.5rem 1rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="toc">
+            <h2>目录</h2>
+            <ul>
+                <li><a href="#section-1">一、工作机参数计算</a></li>
+                <li><a href="#section-2">二、总传动比与带传动比分配</a></li>
+                <li><a href="#section-3">三、各轴转速计算</a></li>
+                <li><a href="#section-4">四、总效率与电机输出功率</a></li>
+                <li><a href="#section-5">五、各轴转矩计算</a></li>
+                <li><a href="#section-6">核心结论</a></li>
+                <li><a href="#section-7">解题思路</a></li>
+                <li><a href="#section-8">名词解释</a></li>
+                <li><a href="#section-9">知识点</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <h1>💡解答 Q2-5（做成HTML时用子窗口存放完整解答）</h1>
+
+            <h2 id="section-1">一、工作机参数计算</h2>
+            <p>已知：\( F = 2000\ \mathrm{N} \)，\( D = 500\ \mathrm{mm} = 0.5\ \mathrm{m} \)，\( v = 0.5\ \mathrm{m/s} \)，\( n_1 = 960\ \mathrm{r/min} \)</p>
+
+            <ol>
+                <li><strong>工作机（卷筒）转速</strong>
+                    <div class="math-block">\[
+                    n_k = \frac{60v}{\pi D} = \frac{60 \times 0.5}{\pi \times 0.5} \approx 19.1\ \mathrm{r/min}
+                    \]</div>
+                </li>
+                <li><strong>工作机功率</strong>
+                    <div class="math-block">\[
+                    P_s = \frac{Fv}{1000} = \frac{2000 \times 0.5}{1000} = 1\ \mathrm{kW}
+                    \]</div>
+                </li>
+            </ol>
+
+            <hr>
+
+            <h2 id="section-2">二、总传动比与带传动比分配</h2>
+            <ol>
+                <li><strong>总传动比</strong>
+                    <div class="math-block">\[
+                    i_{\text{总}} = \frac{n_1}{n_k} = \frac{960}{19.1} \approx 50.26
+                    \]</div>
+                </li>
+                <li><strong>传动比分配</strong>
+                    <p>总传动比 \( i_{\text{总}} = i_{\text{带}} \cdot i_{\text{减}} \cdot i_{\text{齿}} \)，取 \( i_{\text{减}} = 6 \)，\( i_{\text{齿}} = 4 \)，则：</p>
+                    <div class="math-block">\[
+                    i_{\text{带}} = \frac{i_{\text{总}}}{i_{\text{减}} \cdot i_{\text{齿}}} = \frac{50.26}{6 \times 4} \approx 2.09
+                    \]</div>
+                    <p>取 \( i_{\text{带}} = 2 \)，校验速度误差：<br>
+                    实际卷筒转速 \( n_k' = \frac{960}{2 \times 6 \times 4} = 20\ \mathrm{r/min} \)</p>
+                    <div class="math-block">\[
+                    \text{误差} = \left| \frac{20 - 19.1}{19.1} \right| \times 100\% \approx 4.71\% < 5\% \quad (\text{满足要求})
+                    \]</div>
+                    <p>故带传动比取 \( \boldsymbol{i_{\text{带}} = 2} \)。</p>
+                </li>
+            </ol>
+
+            <hr>
+
+            <h2 id="section-3">三、各轴转速计算</h2>
+            <ul>
+                <li>带传动从动轴（减速器高速轴）：
+                    <div class="math-block">\[
+                    n_2 = \frac{n_1}{i_{\text{带}}} = \frac{960}{2} = 480\ \mathrm{r/min}
+                    \]</div>
+                </li>
+                <li>减速器低速轴（开式齿轮高速轴）：
+                    <div class="math-block">\[
+                    n_3 = \frac{n_2}{i_{\text{减}}} = \frac{480}{6} = 80\ \mathrm{r/min}
+                    \]</div>
+                </li>
+                <li>开式齿轮低速轴（卷筒轴）：
+                    <div class="math-block">\[
+                    n_k' = \frac{n_3}{i_{\text{齿}}} = \frac{80}{4} = 20\ \mathrm{r/min} \quad (\text{与校验结果一致})
+                    \]</div>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h2 id="section-4">四、总效率与电机输出功率</h2>
+            <p>已知各传动效率：<br>
+            \( \eta_1 = 0.95 \)（开式齿轮），\( \eta_2 = 0.98 \)（轴承，2对），\( \eta_3 = 0.9 \)（减速器），\( \eta_4 = 0.96 \)（卷筒），\( \eta_5 = 0.99 \)（联轴器），\( \eta_6 = 0.96 \)（带传动）</p>
+
+            <ol>
+                <li><strong>总效率</strong>
+                    <div class="math-block">\[
+                    \eta = \eta_1 \cdot \eta_2^2 \cdot \eta_3 \cdot \eta_4 \cdot \eta_5 \cdot \eta_6 = 0.95 \times 0.98^2 \times 0.9 \times 0.96 \times 0.99 \times 0.96 \approx 0.7449
+                    \]</div>
+                </li>
+                <li><strong>电机输出功率</strong>
+                    <div class="math-block">\[
+                    P_d = \frac{P_s}{\eta} = \frac{1}{0.7449} \approx 1.34\ \mathrm{kW}
+                    \]</div>
+                </li>
+            </ol>
+
+            <hr>
+
+            <h2 id="section-5">五、各轴转矩计算</h2>
+            <ol>
+                <li><strong>电机轴转矩</strong>
+                    <div class="math-block">\[
+                    T_d = 9.55 \times 10^6 \cdot \frac{P_d}{n_1} = 9.55 \times 10^6 \cdot \frac{1.34}{960} \approx 1.33 \times 10^4\ \mathrm{N \cdot mm}
+                    \]</div>
+                </li>
+                <li><strong>带传动从动轴转矩</strong>
+                    <p>带传动从动轴功率：</p>
+                    <div class="math-block">\[
+                    P_2 = P_d \cdot \eta_6 = 1.34 \times 0.96 \approx 1.29\ \mathrm{kW}
+                    \]</div>
+                    <div class="math-block">\[
+                    T_2 = 9.55 \times 10^6 \cdot \frac{P_2}{n_2} = 9.55 \times 10^6 \cdot \frac{1.29}{480} \approx 2.57 \times 10^4\ \mathrm{N \cdot mm}
+                    \]</div>
+                </li>
+            </ol>
+
+            <hr>
+
+            <h2 id="section-6">核心结论</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>项目</th>
+                        <th>结果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>工作机转速 \( n_k \)</td>
+                        <td>\( \approx 19.1\ \mathrm{r/min} \)</td>
+                    </tr>
+                    <tr>
+                        <td>工作机功率 \( P_s \)</td>
+                        <td>\( 1\ \mathrm{kW} \)</td>
+                    </tr>
+                    <tr>
+                        <td>总传动比 \( i_{\text{总}} \)</td>
+                        <td>\( \approx 50.26 \)</td>
+                    </tr>
+                    <tr>
+                        <td>带传动比 \( i_{\text{带}} \)</td>
+                        <td>\( 2 \)（满足误差要求）</td>
+                    </tr>
+                    <tr>
+                        <td>总效率 \( \eta \)</td>
+                        <td>\( \approx 0.7449 \)</td>
+                    </tr>
+                    <tr>
+                        <td>电机输出功率 \( P_d \)</td>
+                        <td>\( \approx 1.34\ \mathrm{kW} \)</td>
+                    </tr>
+                    <tr>
+                        <td>电机轴转矩 \( T_d \)</td>
+                        <td>\( \approx 1.33 \times 10^4\ \mathrm{N \cdot mm} \)</td>
+                    </tr>
+                    <tr>
+                        <td>带传动从动轴转矩 \( T_2 \)</td>
+                        <td>\( \approx 2.57 \times 10^4\ \mathrm{N \cdot mm} \)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h2 id="section-7">解题思路</h2>
+            <p>为求出"带"的传动比（i_带）</p>
+            <ol>
+                <li>预备工作，求 <img src="工作机转速_工作机功率.png" alt="工作机转速_工作机功率" class="inline-image"></li>
+                <li>先求出"总传动比"</li>
+                <li>总传动比是传动比i的连乘，得i_带 <img src="总传动比.png" alt="总传动比" class="inline-image">，验证误差</li>
+            </ol>
+
+            <hr>
+
+            <h2 id="section-8">名词解释</h2>
+            <p><img src="Pd_Ps.png" alt="Pd_Ps" class="inline-image"> P_s > P_d 因为driving > service，额定，和实际有用功（中间肯定有消耗）</p>
+
+            <hr>
+
+            <h2 id="section-9">知识点</h2>
+            <p><img src="工程中效率默认值.png" alt="工程中效率默认值"></p>
+            <p><img src="总效率.png" alt="总效率"></p>
+            <p><img src="轴承.png" alt="轴承"></p>
+            <p><img src="外露轴承.png" alt="外露轴承">，Q2-5<img src="题目中的2对.png" alt="题目中的2对"></p>
+            <p><img src="力矩计算公式9550.png" alt="力矩计算公式9550"></p>
+            <p><img src="力矩传递公式.png" alt="力矩传递公式"></p>
+        </main>
+    </div>
+</body>
+</html>
