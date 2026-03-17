@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.5 铸造熔炼与造型材料 - 3月17日课堂笔记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .toc {
+            flex: 0 0 220px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .toc h3 {
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            font-size: 16px;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: #5a5a5a;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .toc a:hover {
+            color: #0066cc;
+        }
+
+        .toc .toc-level-2 {
+            padding-left: 15px;
+        }
+
+        .toc .toc-level-3 {
+            padding-left: 30px;
+        }
+
+        .content {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8e8e8;
+        }
+
+        h2 {
+            font-size: 22px;
+            color: #2c3e50;
+            margin: 35px 0 20px;
+            padding-left: 12px;
+            border-left: 4px solid #0066cc;
+        }
+
+        h3 {
+            font-size: 18px;
+            color: #34495e;
+            margin: 25px 0 15px;
+        }
+
+        h4 {
+            font-size: 16px;
+            color: #555;
+            margin: 20px 0 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        em {
+            color: #666;
+            font-style: italic;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .toc {
+                position: static;
+                flex: none;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .toc {
+                display: none;
+            }
+
+            .content {
+                box-shadow: none;
+                padding: 0;
+            }
+
+            img {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="toc">
+            <h3>目录</h3>
+            <ul>
+                <li><a href="#section-1">2.5.1 铸铁的熔炼</a>
+                    <ul class="toc-level-2">
+                        <li><a href="#冲天炉">冲天炉（Cupola）</a></li>
+                        <li><a href="#含碳量">含碳量（负相关）</a></li>
+                        <li><a href="#熔渣酸碱">熔渣的酸碱</a></li>
+                        <li><a href="#感应电炉">感应电炉 VS 冲天炉</a></li>
+                    </ul>
+                </li>
+                <li><a href="#section-2">2. 铸铁溶体处理</a></li>
+                <li><a href="#section-3">2.5.2 铸钢的熔炼</a>
+                    <ul class="toc-level-2">
+                        <li><a href="#电弧炉">电弧炉（Arc Furnace）</a></li>
+                        <li><a href="#AOD炉">AOD炉</a></li>
+                        <li><a href="#VOD炉">VOD炉（真空）</a></li>
+                        <li><a href="#LF炉">LF（电弧）</a></li>
+                    </ul>
+                </li>
+                <li><a href="#section-4">2.5.3 铝合金的熔炼</a>
+                    <ul class="toc-level-2">
+                        <li><a href="#铝合金炉子">铝合金的炉子们</a></li>
+                        <li><a href="#熔化分类">熔化及冶金处理分类</a></li>
+                    </ul>
+                </li>
+                <li><a href="#section-5">2.6 砂型铸造</a>
+                    <ul class="toc-level-2">
+                        <li><a href="#型砂材料">2.6.1 型砂材料</a></li>
+                        <li><a href="#砂型造型">2.6.2 砂型铸造造型</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <h1>2.5 铸造熔炼与造型材料</h1>
+
+            <h2 id="section-1">2.5.1 铸铁的熔炼</h2>
+
+            <p><strong>浇注温度：</strong>1400</p>
+
+            <p><strong>出炉温度：</strong>1450（原先+50）</p>
+
+            <p><strong>薄件出路</strong> 再+20（冷却快）</p>
+
+            <h3 id="冲天炉">冲天炉（Cupola）</h3>
+
+            <p>底焦燃烧——预热、融化、过热——冶金（氧化还原、渗硫、脱硫、脱气、脱杂）</p>
+
+            <p><strong>反应结果：</strong>Fe/Mn/Si——氧化</p>
+
+            <p>碳C的变化↑，增硫S↑（焦碳含大量硫）∵直接和焦底直接接触</p>
+
+            <p><strong>补充：</strong>熔渣如CaCO<sub>3</sub>，CaF<sub>2</sub>（非金属，氧化物）</p>
+
+            <p>保护，隔绝空气（防止继续氧化），去除杂质</p>
+
+            <h3 id="含碳量">含碳量（负相关）</h3>
+
+            <p><em>原先碳含量高 —— 降低；原先碳含量低 —— 碳含量升高</em></p>
+
+            <p><img src="sources/carbon_content_hantan_bianhua.png" alt="含碳量变化"></p>
+
+            <h3 id="熔渣酸碱">熔渣的酸碱</h3>
+
+            <p><img src="sources/sulfur_distribution_liu_fenpei_biyu.png" alt="熔渣酸碱度与硫分配"></p>
+
+            <p>（酸性熔渣）硫的含量高，能去除更多碱性的杂志</p>
+
+            <p>铁液温度和成分波动大，∵焦底存在"烧损"（氧化了，或者直接融入铁液）</p>
+
+            <h3 id="感应电炉">感应电炉 VS 冲天炉</h3>
+
+            <p><img src="sources/steel_melting_zhugai_ronglian.png" alt="感应电炉与冲天炉对比"></p>
+
+            <p>感应电炉：不会增碳增硫，氧化少，出炉温度高，成分更容易控制（电磁搅拌）</p>
+
+            <h2 id="section-2">2. 铸铁溶体处理</h2>
+
+            <p>复习："孕育处理"only 铸铁</p>
+
+            <p>球化处理：（加入镁——稀土元素）让他表面粗糙，在"螺旋面"长，形成球化</p>
+
+            <h2 id="section-3">2.5.2 铸钢的熔炼</h2>
+
+            <p>（！不能用冲天炉，∵碳元素需要控制）</p>
+
+            <p>满足浇注要求</p>
+
+            <p>Si/Mn/C成分控制</p>
+
+            <h3 id="电弧炉">电弧炉（Arc Furnace）</h3>
+
+            <p><img src="sources/arc_furnace_jiaoliu_sanxiang.png" alt="电弧炉结构"></p>
+
+            <p>萤石=活石</p>
+
+            <p>氧化铁皮=氧化亚铁（Fe的氧化物）</p>
+
+            <p><strong>精炼处理：</strong>降低（H\O\N\S\P）去</p>
+
+            <p><strong>炉外精炼法：</strong>AOD法（氩氧脱碳精练）、VOD法（真空脱氧精练）、LF法（电弧炉精炼）</p>
+
+            <h3 id="AOD炉">AOD炉</h3>
+
+            <p><img src="sources/AOD_furnace_luti_schematic.png" alt="AOD炉"></p>
+
+            <p>顺序：先除碳——再脱氧——其他气体（靠氩气）</p>
+
+            <p>氧化成CO<sub>2</sub>，脱氧剂脱氧，氩气吹走</p>
+
+            <h3 id="VOD炉">VOD炉（真空）</h3>
+
+            <p><img src="sources/VOD_furnace_luti_schematic.png" alt="VOD炉"></p>
+
+            <p><em>在AOD基础上，抽真空，保护合金元素</em></p>
+
+            <p>环境：真空，金属液气体溶解度低（往空间跑）</p>
+
+            <h3 id="LF炉">LF（电弧）</h3>
+
+            <h2 id="section-4">2.5.3 铝合金的熔炼</h2>
+
+            <p>铝合金：600</p>
+
+            <p><strong>铝合金熔渣的要求：</strong></p>
+
+            <p>温度合适（略低于 600）</p>
+
+            <p>惰性（不参与反应，氯化物KCl）</p>
+
+            <h3 id="铝合金炉子">铝合金的炉子们</h3>
+
+            <p><img src="sources/material_furnace_selection_cailiao_lufare.png" alt="铝合金熔炼炉"></p>
+
+            <p><strong>精炼处理：</strong>去除氢气（高温液体时H<sub>2</sub>溶解度大）</p>
+
+            <p>除H<sub>2</sub>：高压ZnCl<sub>2</sub>，C<sub>2</sub>Cl<sub>2</sub> 氯盐活氯化物</p>
+
+            <p>其他常见方法：输入氩气</p>
+
+            <p>气体：冶金反应析出，高温液体的时候溶解度高（固液溶解度差距10<sup>18</sup>）</p>
+
+            <h3 id="熔化分类">熔化及冶金处理分类</h3>
+
+            <p>按：原料成分、铸造温度——熔化方法、对杂质的敏感</p>
+
+            <h2 id="section-5">2.6 砂型铸造</h2>
+
+            <p>砂型 vs 型砂（Molding Sand）这两个的区别？？</p>
+
+            <h3 id="型砂材料">2.6.1 型砂材料</h3>
+
+            <p><img src="sources/molding_sand_xingsha_composition.png" alt="型砂材料组成"></p>
+
+            <p>*骨料：石英质硅砂</p>
+
+            <p>*粘结剂：粘土+水（韧性和强度）</p>
+
+            <p>*（若需）附加物：煤粉（脱氧还原）</p>
+
+            <h3 id="砂型造型">2.6.2 砂型铸造造型</h3>
+
+            <p><strong>概念：</strong></p>
+
+            <p>造型（molding）：填砂——紧实——期末——修整（气孔）</p>
+
+            <p>紧实度：型砂被紧实的程度（不连连续体的密度）</p>
+
+            <h4>砂型铸造示意图</h4>
+
+            <p><img src="sources/sand_casting_process_shaxing_zhuzao.png" alt="砂型铸造示意图"></p>
+
+            <h4>紧实方法总结</h4>
+
+            <p>震：下面部分</p>
+
+            <p>压：上面紧实</p>
+
+            <p>其他：带着速度填砂等等</p>
+        </main>
+    </div>
+</body>
+</html>
