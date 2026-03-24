@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>齿轮传动（续）- 课堂笔记</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --code-bg: #f3f4f6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Table of Contents */
+        .toc {
+            position: sticky;
+            top: 20px;
+            width: 250px;
+            height: fit-content;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .toc li {
+            margin: 5px 0;
+        }
+
+        .toc a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .toc a:hover {
+            background-color: var(--code-bg);
+            color: var(--primary-color);
+        }
+
+        .toc .toc-level-2 {
+            padding-left: 15px;
+        }
+
+        .toc .toc-level-3 {
+            padding-left: 15px;
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            min-width: 0;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #374151;
+        }
+
+        p {
+            margin: 12px 0;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin: 10px 0;
+        }
+
+        li {
+            margin: 6px 0;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+
+        /* Inline images */
+        p img {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+
+        /* Math/Formula styling */
+        .formula {
+            background: var(--code-bg);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: "Cambria Math", "Times New Roman", serif;
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        /* Code blocks */
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .toc {
+                position: static;
+                width: 100%;
+                max-height: none;
+            }
+
+            .content {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            h3 {
+                font-size: 16px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .toc {
+                display: none;
+            }
+
+            .content {
+                box-shadow: none;
+                padding: 0;
+            }
+
+            img {
+                page-break-inside: avoid;
+            }
+
+            h2, h3 {
+                page-break-after: avoid;
+            }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="toc">
+            <h3>目录</h3>
+            <ul>
+                <li><a href="#section-1">齿轮传动（续）</a>
+                    <ul class="toc-level-2">
+                        <li><a href="#section-2">齿轮失效</a>
+                            <ul class="toc-level-3">
+                                <li><a href="#section-3">齿轮折断（拉应力）</a></li>
+                                <li><a href="#section-4">齿面点蚀（Pitting）（主：接触应力）</a></li>
+                                <li><a href="#section-5">齿面磨损（表面磨损）</a></li>
+                                <li><a href="#section-6">齿面胶合（黏着磨损）</a></li>
+                                <li><a href="#section-7">塑形变形</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#section-8">2.4.4 齿轮材料</a></li>
+                        <li><a href="#section-9">2.4.5 疲劳强度计算</a>
+                            <ul class="toc-level-3">
+                                <li><a href="#section-10">Hertz公式</a></li>
+                                <li><a href="#section-11">最大接触应力（解决点蚀问题）</a></li>
+                                <li><a href="#section-12">φ_d齿宽系数</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#section-13">弯曲疲劳强度</a></li>
+                        <li><a href="#section-14">NEW - 蜗杆涡轮</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <h1 id="section-1">齿轮传动（续）</h1>
+
+            <h2 id="section-2">齿轮失效</h2>
+
+            <h3 id="section-3">齿轮折断（拉应力）</h3>
+
+            <h3 id="section-4">齿面点蚀（Pitting）（主：接触应力）</h3>
+
+            <p><img src="../sources/齿面点蚀.png" alt="齿面点蚀"></p>
+
+            <p><strong>形成过程</strong>：脉动接触应力-表层微小疲劳-润滑油跑进去，挤压形成高压-裂纹扩展-表层剥落</p>
+
+            <p><strong>形成原因</strong></p>
+
+            <p>节点（2）：</p>
+            <ul>
+                <li>单齿啮合（应力最大）</li>
+                <li>纯滚动（难以形成润滑液油膜，直接接触）</li>
+            </ul>
+
+            <p>曲率半径（1）：小，接触应力大</p>
+
+            <p><strong>发生处</strong>：润滑好，封闭式的（箱体）传动</p>
+
+            <p><strong>发生位置</strong>：界线</p>
+
+            <p><strong>补充</strong>：曲率半径越小，接触应力越大</p>
+
+            <p><strong>措施</strong>（3）：</p>
+            <ul>
+                <li>应力许用值</li>
+                <li>硬度性能好：淬火</li>
+                <li>润滑黏度↑（不易于流进去裂纹）</li>
+            </ul>
+
+            <h3 id="section-5">齿面磨损（表面磨损）</h3>
+
+            <p>措施：硬度</p>
+
+            <h3 id="section-6">齿面胶合（黏着磨损）</h3>
+
+            <p>分类：热胶合（高压打破金属表面界线），冷胶合（低速重载）</p>
+
+            <p><strong>措施</strong>：强制冷却，降低温度；合理匹配不同材料，润滑油里抗胶合</p>
+
+            <h3 id="section-7">塑形变形</h3>
+
+            <p>原因：摩擦方向在节点处方向上改变</p>
+
+            <p>前<img src="../sources/塑形变形_前.png" alt="塑形变形前">
+            后<img src="../sources/塑形变形_后.png" alt="塑形变形后"></p>
+
+            <h3>万用的措施</h3>
+
+            <p>硬度↑ 接触应力↓</p>
+
+            <h3>设计齿轮</h3>
+
+            <p>闭式：点蚀，齿根弯曲 most detectable</p>
+
+            <h2 id="section-8">2.4.4 齿轮材料</h2>
+
+            <p><strong>补充</strong>：HB——布氏硬度，HRC——洛氏硬度</p>
+
+            <p><strong>要求</strong>：</p>
+            <ol>
+                <li>内韧外硬</li>
+                <li>大小齿轮（∵HB_小 - HB_大 ≥ 30）</li>
+                <li>选材：钢，铸铁（低成本），塑料（小功率）</li>
+            </ol>
+
+            <h3>增加硬度常见工艺（热处理4把火）</h3>
+
+            <p><img src="../sources/热处理工艺.png" alt="热处理工艺"></p>
+
+            <ul>
+                <li>退火</li>
+                <li>正火</li>
+                <li>淬火</li>
+                <li>回火</li>
+                <li>调质 = 淬火 + （？）</li>
+            </ul>
+
+            <p><strong>notes，请你帮我联网搜集gif动图（各种表面，和加工工艺的过程）</strong></p>
+
+            <h2 id="section-9">2.4.5 疲劳强度计算</h2>
+
+            <h3 id="section-10">Hertz公式</h3>
+
+            <p><img src="../sources/Hertz公式.png" alt="Hertz公式"></p>
+
+            <p>泊松比，和综合半径</p>
+
+            <p><img src="../sources/综合半径.png" alt="综合半径"></p>
+
+            <p><strong>注</strong>：b是受法向力Fn线接触长度</p>
+
+            <p><strong>节点</strong>：是单齿啮合（单齿啮合区），是齿轮的分度圆上</p>
+
+            <h3 id="section-11">最大接触应力（解决点蚀问题）</h3>
+
+            <p>丑陋的公式：</p>
+
+            <p><img src="../sources/接触应力公式.png" alt="接触应力公式"></p>
+
+            <p><strong>补充</strong>：Z_E, Z_H分别是材料，节点系数，右半边才是可以设计的</p>
+
+            <h3 id="section-12">φ_d齿宽系数</h3>
+
+            <p>（一般来说越大越好，但必然有个范围）</p>
+
+            <p><img src="../sources/齿宽系数.png" alt="齿宽系数"></p>
+
+            <p>d ∝ φ_d^(2/3)</p>
+
+            <p>也就是说在范围许可情况下φ_d↑，d↓，a↓，整体结构更concise</p>
+
+            <h3>问题</h3>
+
+            <p>接触疲劳谁大谁小，大齿轮还是小齿轮</p>
+
+            <p>AI回答：小齿轮作为计算考量</p>
+
+            <p><img src="../sources/接触疲劳分析.png" alt="接触疲劳分析"></p>
+
+            <p><strong>设计的方案</strong>：比较选优</p>
+
+            <h3>许用应力</h3>
+
+            <p>（这个没太听懂）</p>
+
+            <p>这里考虑：σ_H</p>
+
+            <p><img src="../sources/许用应力计算.png" alt="许用应力计算"></p>
+
+            <p>接触疲劳强度done（不等式两边都考虑了）</p>
+
+            <h2 id="section-13">弯曲疲劳强度</h2>
+
+            <h3>建立力学模型（简化模型）</h3>
+
+            <p><img src="../sources/力学模型.png" alt="力学模型"></p>
+
+            <p><strong>假设</strong>：所有载荷都是1对齿轮啮合（不在意是否双齿啮合）</p>
+
+            <p>——会导致：齿根弯曲应力（比实际大，做到缓冲空间）</p>
+
+            <p>悬臂梁作用在远离"齿根"处，弯矩最大</p>
+
+            <h3>最大弯曲应力</h3>
+
+            <p><img src="../sources/弯曲应力公式.png" alt="弯曲应力公式"></p>
+
+            <p><strong>补充</strong>：齿形系数Y_Fa</p>
+
+            <h3>许用应力</h3>
+
+            <p>（用各种系数来表示）</p>
+
+            <p><img src="../sources/弯曲许用应力.png" alt="弯曲许用应力"></p>
+
+            <p>这里考虑：σ_F</p>
+
+            <p><strong>注</strong>：双侧工作（能力还得往下砍，留出裕量）</p>
+
+            <h3>设计情况</h3>
+
+            <p>都计算，取最危险的做设计</p>
+
+            <p><strong>许用值/实际值</strong>：[σ]/σ——比值越大，强度越大，反之取倒数, σ/[]</p>
+
+            <p><strong>推广</strong>（取倒数后）：(Y/[σ])_小 vs (Y/[])_大，2个Y，2个σ都不一样</p>
+
+            <p>比较这两者的大小，大的——强度小——较应该被考虑</p>
+
+            <h3>斜齿轮</h3>
+
+            <p>当量齿轮（直齿轮切出来，投影成一个——椭圆齿轮）</p>
+
+            <p><strong>补充</strong>：多考虑Z_β（螺旋角系数）</p>
+
+            <h3>锥齿轮</h3>
+
+            <p>背锥面的当成直齿轮（也是用当量）</p>
+
+            <h2 id="section-14">NEW</h2>
+
+            <h3>蜗杆涡轮</h3>
+
+            <h4>加工方式</h4>
+
+            <ul>
+                <li>蜗轮：滚刀范成法（∴可以正负变位）</li>
+                <li>蜗杆：工件匀速转动，车刀匀速推进</li>
+            </ul>
+
+            <h4>蜗杆受力分析</h4>
+
+            <p>（依旧3个）</p>
+
+            <p><strong>摩擦力不能忽略</strong></p>
+
+            <p><img src="../sources/蜗杆受力分析.png" alt="蜗杆受力分析"></p>
+
+            <p><strong>注</strong>：在齿轮里其实忽略了两项（效率很好，忽略摩擦导致的除了径向方向上的内容）</p>
+
+            <p>书：<img src="../sources/蜗杆受力公式.png" alt="蜗杆受力公式">，α=20°</p>
+
+            <p><strong>注意</strong>！蜗杆涡轮"旋向"一样，都是右旋</p>
+
+            <p><img src="../sources/蜗杆涡轮旋向.png" alt="蜗杆涡轮旋向"></p>
+
+            <p>轴向力，可以用"左右手定则"</p>
+
+            <p>要知道"旋转的方向"还有"力的方向"</p>
+
+            <p>不一样了！不是直接等大反向（力的方向判断很重要！）</p>
+
+            <p><img src="../sources/轴向力判断.png" alt="轴向力判断"></p>
+
+            <p><strong>注</strong>：通过"圆周力"即可判断 蜗轮 旋转方向（正逆时）</p>
+
+            <h4>蜗杆传动效率（3）</h4>
+
+            <p><img src="../sources/传动效率.png" alt="传动效率"></p>
+        </main>
+    </div>
+</body>
+</html>
