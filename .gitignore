@@ -1,0 +1,10 @@
+# DME_notes — 机械课程资料（按学期/课程/年份）
+# 磁盘上只保留要上传的 PDF，故只需忽略工具配置
+.claude/
+.codex/
+.mcp.json
+*.aux
+*.log
+*.out
+*.synctex.gz
+__pycache__/
